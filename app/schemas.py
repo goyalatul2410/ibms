@@ -3,8 +3,7 @@ from typing import List, Optional
 
 
 class ReviewBase(BaseModel):
-    book_id: int
-    user_id: int
+    book_id: Optional[int] = None
     review_text: str
     rating: int
 

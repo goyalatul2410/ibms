@@ -67,18 +67,25 @@ def delete_book(db: Session, book_id: int):
 
 
 def create_review(db: Session, book_id: int, review: schemas.ReviewCreate):
-    db_review = models.Review(book_id=book_id, **review.dict())
-    db.add(db_review)
-    db.commit()
-    db.refresh(db_review)
-    return db_review
+    try:
+        db_review = models.Review(book_id=book_id, review_text=review.review_text, rating=review.rating)
+        db.add(db_review)
+        db.commit()
+        db.refresh(db_review)
+        return db_review
+    except SQLAlchemyError as e:
+        db.rollback()
+        raise RuntimeError(f"Database error occurred: {str(e)}")
+    except Exception as e:
+        db.rollback()
+        raise RuntimeError(f"Unexpected error occurred: {str(e)}")
 
 
 def get_reviews(db: Session, book_id: int):
     try:
-        book = db.query(models.Book).filter(models.Book.id == book_id).first()
+        book = db.query(models.Review).filter(models.Review.book_id == book_id)
         if not book:
-            raise HTTPException(status_code=404, detail="Book not found")
+            return []
         return book
     except SQLAlchemyError as e:
         db.rollback()
