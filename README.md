@@ -35,35 +35,6 @@ This project is an Intelligent Book Management System developed using FastAPI. T
    - Caching for the book information.
    - Unit and integration tests for the API endpoints.
 
-## Project Structure
-```
-project/
-├── app/
-│   ├── __init__.py
-│   ├── crud.py
-│   ├── database.py
-│   ├── main.py
-│   ├── models.py
-│   ├── routers/
-│   │   ├── __init__.py
-│   │   └── books.py
-│   ├── schemas.py
-│   └── middleware.py
-├── tests/
-│   ├── __init__.py
-│   ├── test_crud.py
-│   └── test_main.py
-├── alembic/
-│   ├── versions/
-│   ├── env.py
-│   ├── script.py.mako
-│   └── README
-├── .env
-├── alembic.ini
-├── Dockerfile
-├── requirements.txt
-└── README.md
-```
 
 ## Setup and Installation
 1. **Clone the repository:**
@@ -85,7 +56,7 @@ project/
 
 4. **Set up the database:**
    - Create a PostgreSQL database.
-   - Update the database URL in `app/database.py`.
+   - Update the database URL in `app/db/database.py`.
 
 5. **Run database migrations:**
    ```bash
@@ -117,5 +88,3 @@ The API documentation is available at `/docs` when the application is running.
 ## Contributing
 Contributions are welcome! Please submit a pull request or open an issue to discuss any changes.
 
-## License
-This project is licensed under the MIT License.
